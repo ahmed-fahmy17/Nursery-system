@@ -13,7 +13,9 @@ exports.get_child_by_id = (req, res, next) => {
 }
 
 exports.add_child = (req, res, next) => {
-    const newChild = new Child({ ...req.body});
+    const newChild = new Child({ ...req.body });
+    if (req.file)
+        newChild.image = req.file.filename;
     newChild.save()
         .then((newChild) => res.status(200).json({
             message: "Child added"

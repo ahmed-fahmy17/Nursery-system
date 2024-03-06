@@ -11,10 +11,15 @@ const teacher_schema = mongoose.Schema({
     },
     email: {
         type:String,
-        required:true
+        required:true,
+        unique:true
+    },
+    token: {
+        type:String
     },
     image: {
-        type:String
+        type:String,
+        default: 'uploads/prof.png'
     }
 })
 

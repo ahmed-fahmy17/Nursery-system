@@ -9,8 +9,13 @@ const mongoose = require("mongoose");
 const teacherRoute = require("./routes/teacherRoute");
 const childRoute = require("./routes/childRoute");
 const classRoute = require("./routes/classRoute");
+const registerTeacherRoute = require('./routes/registerTeacherRoute');
+const loginRoute = require('./routes/loginRoute');
+const changePasswordRoute = require('./routes/changePasswordRoute');
 const port = process.env.port || 8080;
 const Database = process.env.DB_URL || "mongodb://127.0.0.1:27017/Nursery_database";
+
+server.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 mongoose
     .connect(Database)
@@ -30,6 +35,9 @@ server.use(express.json());
 server.use(teacherRoute);
 server.use(childRoute);
 server.use(classRoute);
+server.use(registerTeacherRoute);
+server.use(loginRoute);
+server.use(changePasswordRoute);
 
 server.use((request, response, next) => {
     response.status(404).json({ message: "Not Found" });

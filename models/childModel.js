@@ -34,6 +34,10 @@ const child_schema = mongoose.Schema({
         required:true
     },
     address: address_schema,
+    image: {
+        type:String,
+        default: 'uploads/prof.png'
+    }
 }
 );
 child_schema.plugin(autoIncrement, {inc_field:"child_id"});
