@@ -5,6 +5,8 @@ require("dotenv").config();
 const path = require('path');
 const cors = require("cors");
 const mongoose = require("mongoose");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./documentation/swagger-output.json');
 
 const teacherRoute = require("./routes/teacherRoute");
 const childRoute = require("./routes/childRoute");
@@ -38,6 +40,7 @@ server.use(classRoute);
 server.use(registerTeacherRoute);
 server.use(loginRoute);
 server.use(changePasswordRoute);
+server.use("/nursery", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 server.use((request, response, next) => {
     response.status(404).json({ message: "Not Found" });
